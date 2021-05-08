@@ -1,0 +1,33 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+#footer {
+  position: fixed;
+  background-color: rgb(120, 120, 120, 150);
+
+  bottom: 0px;
+  left: -5px;
+
+  width: 105%;
+
+  z-index: 10;
+}
+
+#footer > p {
+  margin-left: 10px;
+}
+
+canvas {
+  position: fixed;
+  left: -5px;
+  top: -20px;
+
+  z-index: 2;
+}
+
+#player {
+  position: fixed;
+  z-index: 1;
+}
