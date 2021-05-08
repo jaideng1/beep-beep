@@ -327,7 +327,8 @@ function createNewVideoPlayer() {
     playerVars: {
       'playsinline': 1,
       'autoplay': 1,
-      'controls': 0
+      'controls': 0,
+      'origin': (document.location.host == "jaideng1.github.io") ? "https://" + document.location.host : "http://" + document.location.host;
     },
     events: {
       'onReady': onPlayerReady,
