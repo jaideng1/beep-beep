@@ -1,4 +1,4 @@
-var canvas, canvasContainer, amountOfCars, jackInTheCar, carMovingSound, sirenSound;
+var canvas, canvasContainer, amountOfCars, jackInTheCar, carMovingSound, sirenSound, beepSound;
 
 var cityMode = false;
 
@@ -41,6 +41,13 @@ sirenSound = new Howl({
   src: ['assets/siren_effect.mp3'],
   html5: true,
   format: ["mp3"]
+})
+
+beepSound = new Howl({
+  src: ['assets/beepbeep.mp3'],
+  html5: true,
+  format: ["mp3"],
+  onend: videoOver
 })
 
 var colors = [
@@ -320,21 +327,23 @@ function createNewMovingCar(carX, carY) {
 }
 
 function createNewVideoPlayer() {
-  player = new YT.Player('player', {
-    height: '49',
-    width: '80',
-    videoId: 'oDn-i76V5KU',
-    playerVars: {
-      'playsinline': 1,
-      'autoplay': 1,
-      'controls': 0,
-      'origin': (document.location.host == "jaideng1.github.io") ? "https://" + document.location.host : "http://" + document.location.host;
-    },
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': changeState
-    }
-  });
+  onPlayerReady(null)
+  // player = new YT.Player('player', {
+  //   height: '49',
+  //   width: '80',
+  //   videoId: 'oDn-i76V5KU',
+  //   playerVars: {
+  //     'playsinline': 1,
+  //     'autoplay': 1,
+  //     'controls': 0,
+  //     //'enablejsapi': 1
+  //     //'origin': (document.location.host == "jaideng1.github.io") ? "https://" + document.location.host : "http://" + document.location.host
+  //   },
+  //   events: {
+  //     'onReady': onPlayerReady,
+  //     'onStateChange': changeState
+  //   }
+  // });
 }
 
 var player;
@@ -343,14 +352,21 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-  player.seekTo(Math.random() * 2)
-  event.target.playVideo();
+  if (player != null) {
+    player.seekTo(Math.random() * 2)
+  } else {
+    let id = beepSound.play();
+    beepSound.seek(Math.random() * 2, id);
+  }
+  if (event != null) event.target.playVideo();
 
   if (!toSetData.setIt) {
     toSetData.setIt = true;
 
     setTimeout(() => {
       let vidEle = document.getElementById("player");
+      if (vidEle == null) return;
+
       vidEle.style = "left: " + toSetData.x + "px; top: " + toSetData.y + "px; z-index: 4;";
     }, 10);
   }
@@ -418,8 +434,9 @@ function toCityMode() {
   movingCars = true;
 
   cityModeInterval = setInterval(() => {
-    sirenSound.play();
-  }, 10000);
+    let id = sirenSound.play();
+    sirenSound.fade(1, 0, 10000, id)
+  }, 15000);
 
   createNewMovingCar(Math.floor(Math.random() * amountOfCars.x), Math.floor(Math.random() * amountOfCars.y))
 }
