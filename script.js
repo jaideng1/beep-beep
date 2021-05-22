@@ -35,13 +35,13 @@ function setup() {
 
   generateCarColors()
 
-  let popupTime = 60000;
+  let popupTime = 15000;
 
   setTimeout(() => {
-    document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in 10 secs</p></div>";
+    document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in 8s</p></div>";
     setTimeout(() => {
       document.getElementById("popup-info").innerHTML = "";
-    }, popupTime + 8000)
+    }, 8000)
   }, popupTime)
 }
 
