@@ -31,3 +31,25 @@ canvas {
   position: fixed;
   z-index: 1;
 }
+
+#popup-info {
+  position: fixed;
+  display: flex;
+  text-align: center;
+  color: white;
+  z-index: 3;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-info > div {
+  max-width: 30%;
+  background-color: #404040;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.link-blue {
+  color: #63a9e6;
+}

@@ -9,6 +9,11 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+var smallPopupInfo = {
+  start: false,
+
+};
+
 function setup() {
   canvasContainer = document.getElementById("canvas-container");
 
@@ -29,6 +34,15 @@ function setup() {
   jackInTheCar = loadImage("assets/jackinthecar.png")
 
   generateCarColors()
+
+  let popupTime = 60000;
+
+  setTimeout(() => {
+    document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in 10 secs</p></div>";
+    setTimeout(() => {
+      document.getElementById("popup-info").innerHTML = "";
+    }, popupTime + 8000)
+  }, popupTime)
 }
 
 carMovingSound = new Howl({
