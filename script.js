@@ -36,15 +36,22 @@ function setup() {
   generateCarColors()
 
   let popupTime = 15000;
+  let disappearTime = 5000;
   
   //Don't do the popup on mobile. Even though it might result in less clicking on the links, I think it looks sort of bad on mobile.
   if (!mobileCheck()) {
     setTimeout(() => {
-      document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in 5s</p></div>";
+      document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in " + (disappearTime / 1000) + "s</p></div>";
       //document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I</p></div>";
       setTimeout(() => {
         document.getElementById("popup-info").innerHTML = "";
       }, 5000);
+      
+      for (let i = 0; i < disappearTime / 1000; i++) {
+        setTimeout(() => {
+          document.getElementById("popup-info").innerHTML = "<div><h4>Hey!</h4><p>I'm jaideng1/jg1. If you want to support my work, consider subscribing to my <a class=\"link-blue\" href=\"https://www.youtube.com/channel/UC-oDqToOF5-yP3vfwBEWYTA\" target=\"_blank\">YouTube channel!</a> Thanks lol - btw this popup will disappear in " + ((disappearTime - (i * 1000)) / 1000) + "s</p></div>";
+        }, i * 1000);
+      }
     }, popupTime)
   }
 }
